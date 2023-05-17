@@ -71,7 +71,7 @@ export const Widget: React.FunctionComponent = () => {
       const fetchCoordsFromAPI = async () => {
         setLoading(true);
         try {
-          const fetchedCoordsStr = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${inputValue}&limit=1&appid=${apiKey}`);
+          const fetchedCoordsStr = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${inputValue}&limit=1&appid=${apiKey}`);
           const coordsObj: TCoordsFetched[] = await fetchedCoordsStr.json()
           const coords: TCoords = {
             lon: coordsObj[0].lon,
@@ -106,9 +106,9 @@ export const Widget: React.FunctionComponent = () => {
         try {
           const [weatherResponse, airPollutionResponse, forecastResponse, pollForecastResponse] = await Promise.all([
             fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`),
-            fetch(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`),
-            fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`),
-            fetch(`http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+            fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`),
+            fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`),
+            fetch(`https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
           ]);
 
           try {
