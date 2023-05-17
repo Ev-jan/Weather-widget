@@ -10,7 +10,7 @@ Location search: Users can search for a city by name to get weather information 
 Geolocation: The widget can automatically detect the user's current location and provide weather information accordingly.
 Responsive design: The widget is designed to be responsive and adaptable to different screen sizes.
 ## Installation
-- Clone the repository: git clone https://github.com/your/repo.git
+- Clone the repository: git clone https://github.com/Ev-jan/Weather-widget.git
 - Install dependencies: npm install
 - Set up API key: Obtain an API key from OpenWeatherMap and replace the placeholder apiKey value in the code with your actual API key.
 - Start the application: npm start
