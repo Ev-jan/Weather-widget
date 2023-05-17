@@ -1,0 +1,19 @@
+  
+  .parameterBlock {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: var(--padding-5);
+    gap: var(--gap-2);
+  }
+  
+  .parameter {
+  color: var(--primary-color);
+  opacity: 0.5;
+  font-size: var(--font-size-1);
+  }
+  
+  .value {
+    color: var(--primary-color);
+    font-size: var(--font-size-15);
+  }

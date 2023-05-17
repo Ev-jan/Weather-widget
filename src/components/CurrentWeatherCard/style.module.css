@@ -1,0 +1,92 @@
+.currentWeather {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+}
+
+.dateGroup {
+  display: flex;
+  column-gap: 10px;
+}
+
+.dateGroup::before {
+  display: inline;
+  content: url("../../../public/i-calendar.svg");
+}
+
+.date {
+  font-weight: bold;
+}
+
+.temperature {
+  font-size: 64px;
+  line-height: 64px;
+}
+
+.specifics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-10);
+}
+
+.smCardItem {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+
+.feels::before {
+  display: block;
+  content: url("../../../public/i-feels.svg");
+  margin-right: 10px;
+  height: 23px;
+}
+
+.wind::before {
+  content: url("../../../public/i-wind.svg");
+  margin-right: 10px;
+  height: 23px;
+}
+
+.description::before {
+  display: block;
+  content: url("../../../public/i-clouds.svg");
+  margin-right: 10px;
+  height: 23px;
+}
+
+@media screen and (max-width: 768px) {
+
+  .currentWeather {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    align-items: start;
+    width: 100%;
+  }
+  .specifics {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .currentWeather {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    align-items: start;
+    width: 100%;
+  }
+
+  .specifics {
+    display: block;
+  }
+}
