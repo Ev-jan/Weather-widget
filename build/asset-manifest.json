@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/atmo-vue/static/css/main.c1db0d7d.css",
+    "main.js": "/atmo-vue/static/js/main.3f695f01.js",
+    "static/js/787.77ff2276.chunk.js": "/atmo-vue/static/js/787.77ff2276.chunk.js",
+    "static/media/tom-barrett-hgGplX3PFBg-unsplash.jpg": "/atmo-vue/static/media/tom-barrett-hgGplX3PFBg-unsplash.e92c9a4e145d7a45810e.jpg",
+    "static/media/i-feels.svg": "/atmo-vue/static/media/i-feels.7f2d170ce952085229f8.svg",
+    "static/media/i-clouds.svg": "/atmo-vue/static/media/i-clouds.ff4792ec1cee52fa90a1.svg",
+    "static/media/i-wind.svg": "/atmo-vue/static/media/i-wind.1d7d3faa18499868c7d4.svg",
+    "static/media/i-calendar.svg": "/atmo-vue/static/media/i-calendar.c04b87f07181fc4f0119.svg",
+    "static/media/i-thermometer.svg": "/atmo-vue/static/media/i-thermometer.0efa88f47b754afdb47e.svg",
+    "static/media/i-weather.svg": "/atmo-vue/static/media/i-weather.4fb6a16131a6b71be6d6.svg",
+    "index.html": "/atmo-vue/index.html",
+    "main.c1db0d7d.css.map": "/atmo-vue/static/css/main.c1db0d7d.css.map",
+    "main.3f695f01.js.map": "/atmo-vue/static/js/main.3f695f01.js.map",
+    "787.77ff2276.chunk.js.map": "/atmo-vue/static/js/787.77ff2276.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c1db0d7d.css",
+    "static/js/main.3f695f01.js"
+  ]
+}
