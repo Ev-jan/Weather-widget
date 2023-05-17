@@ -1,7 +1,7 @@
 
 .highlights {
     grid-row: 1/2;
-    grid-column: 2/3;
+    grid-column: 1/2;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--gap-5);

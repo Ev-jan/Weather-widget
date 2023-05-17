@@ -151,10 +151,6 @@ export const Widget: React.FunctionComponent = () => {
   }, [coords, searchSuccess]);
 
   useEffect(() => {
-    console.log(warning);
-  }, [warning]);
-
-  useEffect(() => {
     if (activeDay) {
       if (totalHourlyForecast) {
         const isHoursShown = filteredHourlyForecastByDate(totalHourlyForecast, activeDay);
@@ -212,8 +208,8 @@ export const Widget: React.FunctionComponent = () => {
             </div>
             <div className={style.accordion}>
               <div className={style.panel}>
-                <h2 className={expandedPanel === "Now" ? `${style.active}` : `${style.panelTitle}`}
-                  id={`${style.panel}-heading`}
+                <h2 className={expandedPanel === "Now" ? `${style.activeHeading}` : `${style.panelTitle}`}
+                  id="heading-now"
                 >
                   <button
                     className={style.accordionTrigger}
@@ -228,8 +224,8 @@ export const Widget: React.FunctionComponent = () => {
                     Now
                   </button>
                 </h2>
-                <h2 className={expandedPanel === "Forecast" ? `${style.active}` : `${style.panelTitle}`}
-                  id={`${style.panel}-heading`}
+                <h2 className={expandedPanel === "Forecast" ? `${style.activeHeading}` : `${style.panelTitle}`}
+                  id="heading-forecast"
                 >
                   <button
                     className={style.accordionTrigger}
@@ -244,8 +240,8 @@ export const Widget: React.FunctionComponent = () => {
                   </button>
                 </h2>
                 <div className={style.content}
-                  id={`${style.content}-${style.panel}`}
-                  aria-labelledby={`${style.panel}-heading`}
+                  id="content-now"
+                  aria-labelledby="heading-now"
                   role="region"
                   style={{
                     display: expandedPanel === "Now" ? "block" : "none",
@@ -261,19 +257,19 @@ export const Widget: React.FunctionComponent = () => {
             </div>
             <div className={style.panel}>
               <div className={style.content}
-                id={`${style.content}-${style.panel}`}
-                aria-labelledby={`${style.panel}-heading`}
+                id="content-forecast"
+                aria-labelledby="heading-forecast"
                 role="region"
                 style={{ display: expandedPanel === "Forecast" ? "block" : "none" }}
               > {forecastData && <ForecastCard
                 forecast={forecastData}
                 setActiveDay={handleSetActiveDay}
               />}
-
               </div>
             </div>
           </section>
-          <section className={style.highlightContainer}>          {activeDayHighlight && (<HighLights
+          <section className={style.highlightContainer}>
+            {activeDayHighlight && (<HighLights
             {...activeDayHighlight as TWeatherData}
           />)}
           </section>
