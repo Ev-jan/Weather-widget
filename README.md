@@ -4,11 +4,11 @@ Weather Widget is a React application that provides current weather information 
 
 ## Key Features
 
-***Current weather display***: The widget shows the current weather conditions, including temperature, humidity, wind speed, and air pollution levels.  
-***5-day forecast***: Users can view a 5-day forecast with weather information for each day.  
-***Location search***: Users can search for a city by name to get weather information for that specific location.  
-***Geolocation***: The widget can detect the user's current location and provide weather information accordingly.  
-***Responsive design***: The widget is designed to be responsive and adaptable to different screen sizes.  
+- ***Current weather display***: The widget shows the current weather conditions, including temperature, humidity, wind speed, and air pollution levels.  
+- ***5-day forecast***: Users can view a 5-day forecast with weather information for each day.  
+- ***Location search***: Users can search for a city by name to get weather information for that specific location.  
+- ***Geolocation***: The widget can detect the user's current location and provide weather information accordingly.  
+- ***Responsive design***: The widget is designed to be responsive and adaptable to different screen sizes.  
 ## Installation
 - Clone the repository: git clone https://github.com/Ev-jan/Weather-widget.git
 - Install dependencies: npm install
