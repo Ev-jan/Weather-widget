@@ -10,7 +10,7 @@ import { filteredForecastHours, filteredHighlightByDate, filteredHourlyForecastB
 import HighLights from "../Highlights/Highlights";
 
 
-export const Widget: React.FunctionComponent = () => {
+const Widget: React.FunctionComponent = () => {
   const apiKey = "d6d87207f783be07e468af85485fcc03";
   const [expandedPanel, setExpandedPanel] = useState("Now");
   const [activeDay, setActiveDay] = useState<number | null>(null);
@@ -295,3 +295,4 @@ export const Widget: React.FunctionComponent = () => {
   )
 }
 
+export default React.memo(Widget)
