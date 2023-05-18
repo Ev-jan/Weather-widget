@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import style from "./style.module.css";
+import Header from "../Header/Header";
 import CurrentWeatherCard from "../CurrentWeatherCard/CurrenWeatherCard"
-import SearchLocation from "../SearchLocation/SearchLocation"
 import ForecastCard from "../ForecastCard/ForecastCard"
 import HourBlock from "../HourBlock/HourBlock";
 import { useEffect, useState } from "react";
@@ -165,18 +165,11 @@ const Widget: React.FunctionComponent = () => {
   return (
     <div className={style.outer}>
       <div className={style.restraining}>
-        <header className={style.header}>
-          <div className={style.logo}>AtmoVue</div>
-          <button
-            className={style.currentLocBtn}
-            aria-label="Get weather for current location"
-            onClick={handleLocationClick}
-            disabled={loading}
-          >Get weather for your current location</button>
-          <SearchLocation
-            onChange={handleSearch}
-            loading={loading} />
-        </header>
+        <Header 
+        loading={loading}
+        onChange={handleSearch}
+        onClick={handleLocationClick}
+        />
         {<div 
         className={style.warningMessage}
         style={{

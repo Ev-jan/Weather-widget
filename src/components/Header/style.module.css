@@ -1,0 +1,74 @@
+
+.header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    max-width: 1024px;
+    padding: var(--padding-20) var(--padding-10);
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+    gap: var(--gap-10);
+  }
+  
+  .logo {
+    display: inline;
+    font-size: var(--font-size-2);
+    font-weight: 700;
+    font-style: italic;
+    flex-shrink: 0;
+  }
+  
+  .logo::before {
+    display: inline;
+    content: url("../../../public/i-weather.svg");
+    margin-right: 10px;
+    vertical-align: text-top;
+  }
+  
+  .currentLocBtn {
+    all: unset;
+    box-sizing: border-box;
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+    height: 40px;
+    border-radius: var(--bord-radius-30);
+    border: 1px solid #ffffff;
+    background: var(--background);
+    color: var(--primary-color);
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  
+  .currentLocBtn:hover {
+    border-radius: 30px;
+    background: var(--highlight);
+    cursor: pointer;
+  }
+
+  
+
+@media screen and (max-width: 768px) {
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .header {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
