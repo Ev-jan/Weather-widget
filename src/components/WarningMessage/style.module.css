@@ -1,0 +1,11 @@
+.warningMessage {
+    text-align: center;
+    font-size: var(--font-size-12);
+    padding: 5px 10px;
+    margin: 0 10px;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out,   transform 0.3s ease-in-out;
+    transition-delay: 0s;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--bord-radius-30);
+  }

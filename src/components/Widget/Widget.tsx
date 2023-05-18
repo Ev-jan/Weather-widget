@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import style from "./style.module.css";
 import Header from "../Header/Header";
+import WarningMessage from "../WarningMessage/WarningMessage";
 import CurrentWeatherCard from "../CurrentWeatherCard/CurrenWeatherCard"
 import ForecastCard from "../ForecastCard/ForecastCard"
 import HourBlock from "../HourBlock/HourBlock";
@@ -170,14 +171,7 @@ const Widget: React.FunctionComponent = () => {
         onChange={handleSearch}
         onClick={handleLocationClick}
         />
-        {<div 
-        className={style.warningMessage}
-        style={{
-          visibility: warning  !== null ? "visible" : "hidden",
-          opacity: warning  !== null ? "1" : "0",
-          transform: warning  !== null ? "translateY(0)" : "translateY(-10px)",
-        }}
-        >{warning?.message}</div>}
+        <WarningMessage warning={warning} />
         {warning  === null && locationMethod !== "notInitiated" && <main className={style.main}>
           <section className={style.briefInfo}>
             <div className={style.cityWrapper}>
