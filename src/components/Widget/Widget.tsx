@@ -2,7 +2,7 @@ import style from "./style.module.css";
 import Header from "../Header/Header";
 import WarningMessage from "../WarningMessage/WarningMessage";
 import BriefInfo from "../BriefInfo/BriefInfo";
-import HourBlock from "../HourBlock/HourBlock";
+import HourlyForecast from "../HourlyForecast/HourlyForecast";
 import { useEffect, useState } from "react";
 import { TLocationMethod, TCoords, TCoordsFetched, TWeatherData, TCurrentFetched, TPollutionCurrentFetched, TForecastFetched, TPollutionForecastFetched, THourlyForecastFiltered, TWarning } from "../../types/types"
 import { filteredForecastHours, filteredHighlightByDate, filteredHourlyForecastByDate, mergeCurrentData, mergeForecastData } from "../../utils/utils"
@@ -180,22 +180,10 @@ const Widget: React.FunctionComponent = () => {
               {...activeDayHighlight as TWeatherData}
             />)}
           </section>
-          <section className={style.hourly}
-            style={{
-              visibility: activeWeatherType === "Forecast" ? "visible" : "hidden",
-              opacity: activeWeatherType === "Forecast" ? "1" : "0",
-              transform: activeWeatherType === "Forecast" ? "translateY(0)" : "translateY(-10px)",
-            }}
-          >
-            <h3 className={style.sectionHeading}>Hourly Forecast</h3>
-            <div className={style.blockBox}>
-              {activeDayHours && (activeDayHours.map((block, index) => (
-                <div className={style.hourBlock} key={index}>
-                  <HourBlock {...block} />
-                </div>
-              )))}
-            </div>
-          </section>
+          <HourlyForecast
+            activeWeatherType={activeWeatherType}
+            activeDayHours={activeDayHours}
+          />
         </main>}
       </div>
     </div>
