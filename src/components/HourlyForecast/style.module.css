@@ -25,7 +25,7 @@
   .hourBlock {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: stretch;
     text-align: center;
     row-gap: var(--gap-5);
@@ -59,14 +59,14 @@
       display: flex;
       flex-flow: column nowrap;
       gap: var(--gap-5);
-      align-items: start;
+      align-items: flex-start;
       justify-content: center;
     }
   
     .hourBlock {
       display: flex;
       flex-direction: row;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: stretch;
       row-gap: 5px;
       column-gap: 5px;

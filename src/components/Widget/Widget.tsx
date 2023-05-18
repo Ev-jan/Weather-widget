@@ -57,7 +57,6 @@ const Widget: React.FunctionComponent = () => {
       type: "invalidInput",
       message: "Please make sure you enter a valid city name.",
     });
-
   }
 
   useEffect(() => {
@@ -89,7 +88,6 @@ const Widget: React.FunctionComponent = () => {
       fetchCoordsFromAPI()
     }
   }, [inputValue])
-
 
   useEffect(() => {
     if (searchSuccess && coords) {
@@ -139,9 +137,7 @@ const Widget: React.FunctionComponent = () => {
         }
       }
       fetchData();
-
     }
-
   }, [coords, searchSuccess]);
 
   useEffect(() => {
@@ -175,11 +171,8 @@ const Widget: React.FunctionComponent = () => {
             activeWeatherType={activeWeatherType}
             setActiveWeatherType={setActiveWeatherType}
           />
-          <section className={style.highlightContainer}>
-            {activeDayHighlight && (<HighLights
-              {...activeDayHighlight as TWeatherData}
-            />)}
-          </section>
+            <HighLights {...activeDayHighlight as TWeatherData}
+            />
           <HourlyForecast
             activeWeatherType={activeWeatherType}
             activeDayHours={activeDayHours}
