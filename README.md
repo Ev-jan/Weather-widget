@@ -1,4 +1,4 @@
-# Weather Widget
+# AtmoVue Weather Widget
 
 Weather Widget is a React application that provides current weather information and a 5-day forecast for a given location. It utilizes the OpenWeatherMap API to fetch weather data, including temperature, humidity, wind speed, and air pollution levels. The widget allows users to search for a location by name or automatically detect their current location using geolocation.
 
