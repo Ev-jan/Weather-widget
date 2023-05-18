@@ -1,19 +1,17 @@
-import React, { useCallback } from "react";
 import style from "./style.module.css";
 import Header from "../Header/Header";
 import WarningMessage from "../WarningMessage/WarningMessage";
-import CurrentWeatherCard from "../CurrentWeatherCard/CurrenWeatherCard"
-import ForecastCard from "../ForecastCard/ForecastCard"
+import BriefInfo from "../BriefInfo/BriefInfo";
 import HourBlock from "../HourBlock/HourBlock";
 import { useEffect, useState } from "react";
-import { TCoords, TCoordsFetched, TWeatherData, TCurrentFetched, TPollutionCurrentFetched, TForecastFetched, TPollutionForecastFetched, THourlyForecastFiltered, TWarning } from "../../types/types"
+import { TLocationMethod, TCoords, TCoordsFetched, TWeatherData, TCurrentFetched, TPollutionCurrentFetched, TForecastFetched, TPollutionForecastFetched, THourlyForecastFiltered, TWarning } from "../../types/types"
 import { filteredForecastHours, filteredHighlightByDate, filteredHourlyForecastByDate, mergeCurrentData, mergeForecastData } from "../../utils/utils"
 import HighLights from "../Highlights/Highlights";
 
 
 const Widget: React.FunctionComponent = () => {
   const apiKey = "d6d87207f783be07e468af85485fcc03";
-  const [expandedPanel, setExpandedPanel] = useState("Now");
+  const [activeWeatherType, setActiveWeatherType] = useState<"Now" | "Forecast">("Now");
   const [activeDay, setActiveDay] = useState<number | null>(null);
   const [city, setCity] = useState<string>('');
   const [inputValue, setInputValue] = useState<string>('');
@@ -21,17 +19,12 @@ const Widget: React.FunctionComponent = () => {
   const [coords, setCoords] = useState<TCoords | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [warning, setWarning] = useState<TWarning | null>(null);
-  const [locationMethod, setLocationMethod] = useState<"searchInput" | "auto" | "notInitiated">("notInitiated")
+  const [locationMethod, setLocationMethod] = useState<TLocationMethod>("notInitiated")
   const [currentData, setCurrentData] = useState<TWeatherData | null>(null);
   const [forecastData, setForecastData] = useState<TWeatherData[] | null>(null);
   const [activeDayHighlight, setActiveDayHighlight] = useState<TWeatherData | null>(null);
   const [activeDayHours, setActiveDayHours] = useState<THourlyForecastFiltered[] | null>(null);
   const [totalHourlyForecast, setTotalHourlyForecast] = useState<THourlyForecastFiltered[] | null>(null);
-
-  const handleSetActiveDay = useCallback((day: number) => {
-    setActiveDay(day);
-  }, []);
-
 
   const handleLocationClick = () => {
     navigator.geolocation.getCurrentPosition(
@@ -146,7 +139,7 @@ const Widget: React.FunctionComponent = () => {
         }
       }
       fetchData();
-      
+
     }
 
   }, [coords, searchSuccess]);
@@ -166,105 +159,32 @@ const Widget: React.FunctionComponent = () => {
   return (
     <div className={style.outer}>
       <div className={style.restraining}>
-        <Header 
-        loading={loading}
-        onChange={handleSearch}
-        onClick={handleLocationClick}
+        <Header
+          loading={loading}
+          onChange={handleSearch}
+          onClick={handleLocationClick}
         />
         <WarningMessage warning={warning} />
-        {warning  === null && locationMethod !== "notInitiated" && <main className={style.main}>
-          <section className={style.briefInfo}>
-            <div className={style.cityWrapper}>
-              <h1 className={style.cityName}>{city}</h1>
-              <p
-                className={style.cityNameSource}
-                style={{
-                  visibility: locationMethod === "auto" ? "visible" : "hidden",
-                  opacity: locationMethod === "auto" ? "1" : "0",
-                  transform: locationMethod === "auto" ? "translateY(0)" : "translateY(-10px)",
-                }}
-              >Based on your current location</p>
-              <p
-                className={style.cityNameSource}
-                style={{
-                  visibility: locationMethod === "searchInput" ? "visible" : "hidden",
-                  opacity: locationMethod === "searchInput" ? "1" : "0",
-                  transform: locationMethod === "searchInput" ? "translateY(0)" : "translateY(-10px)",
-                }}
-              >Based on your search</p>
-            </div>
-            <div className={style.accordion}>
-              <div className={style.panel}>
-                <h2 className={expandedPanel === "Now" ? `${style.activeHeading}` : `${style.panelTitle}`}
-                  id="heading-now"
-                >
-                  <button
-                    className={style.accordionTrigger}
-                    aria-controls={style.content}
-                    aria-expanded={expandedPanel === "Now" ? "true" : "false"}
-                    onClick={() => {
-                      setExpandedPanel("Now");
-                      currentData && setActiveDay(currentData.unix_dt);
-                    }
-                    }
-                  >
-                    Now
-                  </button>
-                </h2>
-                <h2 className={expandedPanel === "Forecast" ? `${style.activeHeading}` : `${style.panelTitle}`}
-                  id="heading-forecast"
-                >
-                  <button
-                    className={style.accordionTrigger}
-                    aria-controls={style.content}
-                    aria-expanded={expandedPanel === "Forecast" ? "true" : "false"}
-                    onClick={() => {
-                      setExpandedPanel("Forecast");
-                      forecastData && setActiveDay(forecastData[0].unix_dt);
-                    }}
-                  >
-                    5-day forecast
-                  </button>
-                </h2>
-                <div className={style.content}
-                  id="content-now"
-                  aria-labelledby="heading-now"
-                  role="region"
-                  style={{
-                    display: expandedPanel === "Now" ? "block" : "none",
-                  }}
-                >
-                  <div className={style.CurrentWeatherCard}>
-                    {currentData && (<CurrentWeatherCard
-                      weatherData={currentData}
-                    />)}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={style.panel}>
-              <div className={style.content}
-                id="content-forecast"
-                aria-labelledby="heading-forecast"
-                role="region"
-                style={{ display: expandedPanel === "Forecast" ? "block" : "none" }}
-              > {forecastData && <ForecastCard
-                forecast={forecastData}
-                setActiveDay={handleSetActiveDay}
-              />}
-              </div>
-            </div>
-          </section>
+        {warning === null && locationMethod !== "notInitiated" && <main className={style.main}>
+          <BriefInfo
+            city={city}
+            currentData={currentData}
+            forecastData={forecastData}
+            locationMethod={locationMethod}
+            setActiveDay={setActiveDay}
+            activeWeatherType={activeWeatherType}
+            setActiveWeatherType={setActiveWeatherType}
+          />
           <section className={style.highlightContainer}>
             {activeDayHighlight && (<HighLights
-            {...activeDayHighlight as TWeatherData}
-          />)}
+              {...activeDayHighlight as TWeatherData}
+            />)}
           </section>
           <section className={style.hourly}
             style={{
-              visibility: expandedPanel === "Forecast" ? "visible" : "hidden",
-              opacity: expandedPanel === "Forecast" ? "1" : "0",
-              transform: expandedPanel === "Forecast" ? "translateY(0)" : "translateY(-10px)",
+              visibility: activeWeatherType === "Forecast" ? "visible" : "hidden",
+              opacity: activeWeatherType === "Forecast" ? "1" : "0",
+              transform: activeWeatherType === "Forecast" ? "translateY(0)" : "translateY(-10px)",
             }}
           >
             <h3 className={style.sectionHeading}>Hourly Forecast</h3>
@@ -282,4 +202,4 @@ const Widget: React.FunctionComponent = () => {
   )
 }
 
-export default React.memo(Widget)
+export default Widget

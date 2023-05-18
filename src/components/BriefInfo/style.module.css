@@ -1,0 +1,87 @@
+
+.briefInfo {
+    grid-column: 1/2;
+    grid-row: 1/3;
+    padding: var(--padding-10);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--bord-radius-5);
+  }
+  
+  .cityWrapper {
+    margin-bottom: var(--mr-20);
+  }
+  
+  .cityName {
+    font-size: var(--font-size-2);
+    color: var(--highlight);
+  
+  }
+  
+  .cityNameSource {
+    font-size: .75rem;
+    font-style: italic;
+  transition: all 2s ease-out;
+  }
+  
+  .accordion {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .panelTitle {
+    text-transform: uppercase;
+    font-size: var(--font-size-1);
+    line-height: 2rem;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    margin-bottom: var(--mr-10);
+    padding: 5px 0;
+  }
+  
+  .accordionTrigger {
+    all: unset;
+    font-size: inherit;
+  }
+  
+  .panelTitle:hover {
+    color: var(--highlight);
+    cursor: pointer;
+    font-size: var(--font-size-12);
+  }
+  
+  .activeHeading {
+    color: var(--highlight);
+    cursor: pointer;
+    font-size:  var(--font-size-12);
+    text-transform: uppercase;
+    line-height: 2rem;
+    margin-bottom: var(--mr-10);
+    background-color: var(--background);
+    border-radius: var(--bord-radius-30);
+    padding: 5px 15px;
+  }
+  
+  .forecastItemContainer {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-5);
+  }
+  
+@media screen and (max-width: 768px) {
+
+    .briefInfo {
+      grid-column: 1/3;
+      grid-row: 1/2;
+      width: 75%;
+      margin: 0 auto;
+    }
+  }
+  
+  @media screen and (max-width: 580px) {
+    .briefInfo {
+      width: 100%;
+      margin: 0;
+    }
+  }

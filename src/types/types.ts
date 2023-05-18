@@ -180,3 +180,5 @@ export type THourlyForecastFiltered = {
     deg: number;
   };
 };
+
+export type TLocationMethod = "searchInput" | "auto" | "notInitiated"
