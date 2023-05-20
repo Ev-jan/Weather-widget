@@ -10,7 +10,7 @@ const HighLights: React.FunctionComponent<TWeatherData> = (weatherData) => {
         value: value,
     }));
 
-    let aqi: string = ''
+    let aqi: string = ""
     switch (weatherData.pollution.aqi) {
         case 1:
             aqi = "good";

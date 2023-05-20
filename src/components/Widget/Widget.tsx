@@ -7,6 +7,29 @@ import { useEffect, useState } from "react";
 import { TLocationMethod, TCoords, TCoordsFetched, TWeatherData, TCurrentFetched, TPollutionCurrentFetched, TForecastFetched, TPollutionForecastFetched, THourlyForecastFiltered, TWarning } from "../../types/types"
 import { filteredForecastHours, filteredHighlightByDate, filteredHourlyForecastByDate, mergeCurrentData, mergeForecastData } from "../../utils/utils"
 import HighLights from "../Highlights/Highlights";
+import Spinner from "./LoadingSpinner/Spinner";
+import { Profiler } from 'react';
+
+function handleRender(
+  id: string,
+  phase: 'mount' | 'update',
+  actualDuration: number,
+  baseDuration: number,
+  startTime: number,
+  commitTime: number,
+  interactions: Set<any>
+) {
+  console.log('Profiler data:', {
+    id,
+    phase,
+    actualDuration,
+    baseDuration,
+    startTime,
+    commitTime,
+    interactions,
+  });
+}
+
 
 
 const Widget: React.FunctionComponent = () => {
@@ -25,8 +48,40 @@ const Widget: React.FunctionComponent = () => {
   const [activeDayHighlight, setActiveDayHighlight] = useState<TWeatherData | null>(null);
   const [activeDayHours, setActiveDayHours] = useState<THourlyForecastFiltered[] | null>(null);
   const [totalHourlyForecast, setTotalHourlyForecast] = useState<THourlyForecastFiltered[] | null>(null);
+  const [display, setDisplay] = useState(false)
+
+  const clearCurrentData = () => {
+    setCurrentData(null);
+    setForecastData(null);
+    setActiveDayHighlight(null);
+    setActiveDayHours(null);
+    setTotalHourlyForecast(null);
+  }
+
+  const handleSearch = (inputCityName: string) => {
+    if (locationMethod === "notInitiated") {
+      setLoading(true);
+      setInputValue(inputCityName);
+      setLocationMethod("searchInput");
+      setWarning(null);
+    } else if (locationMethod === "searchInput" && searchSuccess === false) {
+      clearCurrentData();
+      setInputValue(inputCityName);
+      setLocationMethod("searchInput");
+      setWarning({
+        type: "invalidInput",
+        message: "Please make sure you enter a valid city name.",
+      });
+    }
+    else {
+      setInputValue(inputCityName);
+      setLocationMethod("searchInput");
+      setWarning(null);
+    }
+  }
 
   const handleLocationClick = () => {
+    setLoading(true)
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setCoords({
@@ -44,25 +99,14 @@ const Widget: React.FunctionComponent = () => {
         });
         setSearchSuccess(false)
         console.error(error);
+        setLoading(false)
       }
     );
   };
 
-  const handleSearch = (cityName: string) => {
-    if (cityName.trim() !== '') {
-      setInputValue(cityName);
-      setLocationMethod("searchInput");
-      setWarning(null)
-    } else setWarning({
-      type: "invalidInput",
-      message: "Please make sure you enter a valid city name.",
-    });
-  }
-
   useEffect(() => {
     if (inputValue) {
       const fetchCoordsFromAPI = async () => {
-        setLoading(true);
         try {
           const fetchedCoordsStr = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${inputValue}&limit=1&appid=${apiKey}`);
           const coordsObj: TCoordsFetched[] = await fetchedCoordsStr.json()
@@ -70,10 +114,9 @@ const Widget: React.FunctionComponent = () => {
             lon: coordsObj[0].lon,
             lat: coordsObj[0].lat,
           }
-          setSearchSuccess(true)
+          setSearchSuccess(true);
+          setWarning(null);
           setCoords(coords);
-          setCity(coordsObj[0].name);
-
         } catch (error: any) {
           console.error("error fetching data:", error);
           setWarning({
@@ -81,13 +124,22 @@ const Widget: React.FunctionComponent = () => {
             message: "Sorry, we couldn't find a matching city for your search. Please make sure you enter a valid city name.",
           });
           setSearchSuccess(false);
+
         } finally {
-          setLoading(false);
+          setLoading(false)
         }
       }
       fetchCoordsFromAPI()
     }
   }, [inputValue])
+
+  useEffect(() => {
+    if (!searchSuccess) {
+      setInputValue('');
+      setCity('');
+      clearCurrentData()
+    }
+  }, [searchSuccess])
 
   useEffect(() => {
     if (searchSuccess && coords) {
@@ -152,7 +204,15 @@ const Widget: React.FunctionComponent = () => {
     }
   }, [activeDay, totalHourlyForecast, currentData, forecastData]);
 
+  useEffect(() => {
+    if (searchSuccess === false || loading === true || locationMethod === "notInitiated") {
+      setDisplay(false)
+    }
+    else setDisplay(true)
+  }, [searchSuccess, loading, locationMethod])
+
   return (
+
     <div className={style.outer}>
       <div className={style.restraining}>
         <Header
@@ -161,7 +221,8 @@ const Widget: React.FunctionComponent = () => {
           onClick={handleLocationClick}
         />
         <WarningMessage warning={warning} />
-        {warning === null && locationMethod !== "notInitiated" && <main className={style.main}>
+
+        {display &&  <Profiler id="main" onRender={handleRender}><main className={style.main}>
           <BriefInfo
             city={city}
             currentData={currentData}
@@ -171,15 +232,17 @@ const Widget: React.FunctionComponent = () => {
             activeWeatherType={activeWeatherType}
             setActiveWeatherType={setActiveWeatherType}
           />
-            <HighLights {...activeDayHighlight as TWeatherData}
-            />
+          {activeDayHighlight && <HighLights {...activeDayHighlight as TWeatherData}
+          />}
           <HourlyForecast
             activeWeatherType={activeWeatherType}
             activeDayHours={activeDayHours}
           />
-        </main>}
+        </main></Profiler>}
+        {loading && <Spinner />}
       </div>
     </div>
+    
   )
 }
 
