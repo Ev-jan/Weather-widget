@@ -26,12 +26,7 @@
   position: relative;
   z-index: 2;
 }
-.skeleton{
-display: flex;
-flex-basis: 100%;
-height: 50vmin;
-/* background-color: #202020; */
-}
+
 .main {
   display: grid;
   grid-template-columns: 1fr 3fr;
@@ -52,6 +47,7 @@ height: 50vmin;
     z-index: 2;
     background: rgba(255, 255, 255, 0.1);
     margin: 0 auto;
+    gap: 0px;
   }
 }
 

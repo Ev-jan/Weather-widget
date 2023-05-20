@@ -9,28 +9,6 @@ import { filteredForecastHours, filteredHighlightByDate, filteredHourlyForecastB
 import HighLights from "../Highlights/Highlights";
 import Spinner from "./LoadingSpinner/Spinner";
 
-function handleRender(
-  id: string,
-  phase: 'mount' | 'update',
-  actualDuration: number,
-  baseDuration: number,
-  startTime: number,
-  commitTime: number,
-  interactions: Set<any>
-) {
-  console.log('Profiler data:', {
-    id,
-    phase,
-    actualDuration,
-    baseDuration,
-    startTime,
-    commitTime,
-    interactions,
-  });
-}
-
-
-
 const Widget: React.FunctionComponent = () => {
   const apiKey = "d6d87207f783be07e468af85485fcc03";
   const [activeWeatherType, setActiveWeatherType] = useState<"Now" | "Forecast">("Now");
@@ -221,7 +199,7 @@ const Widget: React.FunctionComponent = () => {
         />
         <WarningMessage warning={warning} />
 
-        {display &&  <main className={style.main}>
+        {display && <main className={style.main}>
           <BriefInfo
             city={city}
             currentData={currentData}
@@ -241,7 +219,7 @@ const Widget: React.FunctionComponent = () => {
         {loading && <Spinner />}
       </div>
     </div>
-    
+
   )
 }
 

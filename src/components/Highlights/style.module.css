@@ -40,6 +40,7 @@
     grid-row: 3/4;
     width: 75%;
     margin: 0 auto;
+    background: none;
   }
 }
 
@@ -48,10 +49,9 @@
   .highlights {
     width: 100%;
     margin: 0;
+    background: none;
   }
 }
-
-
 
 @media screen and (max-width: 480px) {
   .highlights {
@@ -61,7 +61,7 @@
     gap: var(--gap-5);
     align-items: flex-start;
     width: 100%;
-    background: rgba(255, 255, 255, 0.1);
+    background: none;
     gap: var(--bord-radius-5);
   }
 
