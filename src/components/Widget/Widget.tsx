@@ -8,7 +8,6 @@ import { TLocationMethod, TCoords, TCoordsFetched, TWeatherData, TCurrentFetched
 import { filteredForecastHours, filteredHighlightByDate, filteredHourlyForecastByDate, mergeCurrentData, mergeForecastData } from "../../utils/utils"
 import HighLights from "../Highlights/Highlights";
 import Spinner from "./LoadingSpinner/Spinner";
-import { Profiler } from 'react';
 
 function handleRender(
   id: string,
@@ -222,7 +221,7 @@ const Widget: React.FunctionComponent = () => {
         />
         <WarningMessage warning={warning} />
 
-        {display &&  <Profiler id="main" onRender={handleRender}><main className={style.main}>
+        {display &&  <main className={style.main}>
           <BriefInfo
             city={city}
             currentData={currentData}
@@ -238,7 +237,7 @@ const Widget: React.FunctionComponent = () => {
             activeWeatherType={activeWeatherType}
             activeDayHours={activeDayHours}
           />
-        </main></Profiler>}
+        </main>}
         {loading && <Spinner />}
       </div>
     </div>
