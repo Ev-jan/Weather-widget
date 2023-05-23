@@ -1,5 +1,5 @@
 import style from "./style.module.css"
-import { ParamBlock } from "../ParamBlock/ParamBlock"
+import { ParamBlock } from "../Highlights/ParamBlock/ParamBlock"
 
 
 type WeatherDataBoxProps = {

@@ -1,5 +1,5 @@
 import { THourlyForecastFiltered } from "../../types/types"
-import HourBlock from "../HourBlock/HourBlock"
+import HourBlock from "./HourBlock/HourBlock"
 import style from "./style.module.css"
 
 type HourlyForecastProps = {

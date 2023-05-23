@@ -1,5 +1,5 @@
-import { THourlyForecastFiltered } from '../../types/types'
-import { formattedTime } from '../../utils/utils'
+import { THourlyForecastFiltered } from '../../../types/types'
+import { formattedTime } from '../../../utils/utils'
 import style from './style.module.css'
 
 

@@ -1,5 +1,5 @@
 import style from "./style.module.css";
-import { TWeatherData } from "./../../types/types";
+import { TWeatherData } from "../../../types/types";
 
 type CurrentWeatherProps = {
   weatherData: TWeatherData

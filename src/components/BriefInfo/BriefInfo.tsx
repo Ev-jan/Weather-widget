@@ -1,7 +1,7 @@
 import { TLocationMethod, TWeatherData } from "../../types/types"
 import style from "./style.module.css"
 import ForecastCard from "../ForecastCard/ForecastCard";
-import CurrentWeatherCard from "../CurrentWeatherCard/CurrenWeatherCard";
+import CurrentWeatherCard from "./CurrentWeatherCard/CurrenWeatherCard";
 
 type BriefInfoProps = {
     locationMethod: TLocationMethod,
